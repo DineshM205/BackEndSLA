@@ -1,0 +1,27 @@
+ 1. Create a database companyDB.
+CREATE DATABASE companyDB;
+ 2. Create a table employees with constraints: id (PRIMARY KEY), name (NOT NULL), salary (DEFAULT 30000).
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    salary DECIMAL(10,2) DEFAULT 30000
+);
+ 3. Add a UNIQUE constraint on email.
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    salary DECIMAL(10,2) DEFAULT 30000
+);
+ 4. Insert 5 employee records.
+INSERT INTO employees (id, name, email, salary)
+VALUES
+(1, 'John', 'john@gmail.com', 45000),
+(2, 'Emma', 'emma@gmail.com', 50000),
+(3, 'David', 'david@gmail.com', 40000),
+(4, 'Sophia', 'sophia@gmail.com', 55000),
+(5, 'Michael', 'michael@gmail.com', DEFAULT);
+ 5. Try inserting a duplicate email to see the error.
+INSERT INTO employees (id, name, email, salary)
+VALUES
+(6, 'Alex', 'john@gmail.com', 35000);

@@ -1,0 +1,22 @@
+1. Install MySQL on your system and connect using MySQL Workbench or CLI.
+2. Create a new database named schoolDB.
+CREATE DATABASE schoolDB;
+3. Create a simple table students with columns (id, name, age, grade).
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    grade VARCHAR(10)
+);
+4. Insert at least 5 records into students.
+INSERT INTO students (id, name, age, grade)
+VALUES
+(1, 'John', 15, 'A'),
+(2, 'Emma', 16, 'B'),
+(3, 'David', 14, 'A'),
+(4, 'Sophia', 15, 'C'),
+(5, 'Michael', 16, 'B');
+5. Run SELECT * FROM students; and view the data.
+SELECT * FROM students;
+6. Drop the schoolDB database (to practice database removal).
+DROP DATABASE schoolDB;
