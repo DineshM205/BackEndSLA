@@ -1,0 +1,19 @@
+1. Find employees with salary greater than the average salary (subquery).
+SELECT *FROM employees WHERE salary > (SELECT AVG(salary)FROM employees);
+
+2. Select products with price higher than the cheapest order.
+SELECT *FROM products WHERE price > (SELECT MIN(price) FROM orders);
+
+3. Use a subquery inside WHERE to fetch customers with orders.
+SELECT *FROM customers
+WHERE id IN (SELECT customer_id FROM orders);
+
+4. Use a subquery inside SELECT to show order counts.
+SELECT c.id, c.customer_name,(SELECT COUNT(*) FROM orders WHERE o.customer_id = c.id) AS order_count FROM customers c;
+
+5. Use a correlated subquery to find the highest salary per department.
+SELECT * FROM employees e WHERE salary = (SELECT MAX(salary) FROM employees WHERE department_id = e.department_id );
+
+6. Use a subquery to check if a product exists.
+SELECT CASE WHEN EXISTS (SELECT 1 FROM products WHERE product_name = 'Laptop')
+ THEN 'Product Exists'ELSE 'Product Not Found'END AS Status;
