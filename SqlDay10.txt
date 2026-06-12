@@ -1,0 +1,48 @@
+1. Create a stored procedure to insert a new employee.
+
+CREATE PROCEDURE InsertEmployee(
+    IN emp_id INT,
+    IN emp_name VARCHAR(50),
+    IN emp_salary DECIMAL(10,2)
+) BEGIN INSERT INTO employees(id, name, salary) VALUES(emp_id, emp_name, emp_salary);
+
+2. Create a stored procedure to update salary based on id.
+CREATE PROCEDURE UpdateSalary(
+    IN emp_id INT,
+    IN new_salary DECIMAL(10,2)
+)
+BEGIN
+    UPDATE employees
+    SET salary = new_salary
+    WHERE id = emp_id;
+
+3. Write a trigger that updates stock when a new order is placed.
+CREATE TRIGGER UpdateStock
+AFTER INSERT ON orders
+FOR EACH ROW
+BEGIN
+    UPDATE products
+    SET stock = stock - NEW.quantity
+    WHERE product_id = NEW.product_id;
+ 
+4. Write a trigger that prevents deleting the last admin user.
+CREATE TRIGGER PreventLastAdminDelete
+BEFORE DELETE ON users
+FOR EACH ROW
+BEGIN
+    DECLARE admin_count INT;
+    SELECT COUNT(*)
+    INTO admin_count
+    FROM users
+    WHERE role = 'Admin';
+
+    IF OLD.role = 'Admin' AND admin_count = 1 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot delete the last admin user';
+    END IF;
+5. Call a stored procedure to fetch employees.
+CALL GetEmployees();
+6. Drop a procedure and trigger.
+
+DROP PROCEDURE IF EXISTS GetEmployees;
+DROP TRIGGER IF EXISTS UpdateStock;
